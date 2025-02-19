@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "./prisma";
-
+// to check if user exists or not db if not add them in db by fetching details from clerk
 export const checkUser = async () => {
 
     const user = await currentUser();
