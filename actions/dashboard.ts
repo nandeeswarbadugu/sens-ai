@@ -19,9 +19,9 @@ export const generateAIInsights = async (industry) => {
               { "role": "string", "min": number, "max": number, "median": number, "location": "string" }
             ],
             "growthRate": number,
-            "demandLevel": "High" | "Medium" | "Low",
+            "demandLevel": "HIGH" | "MEDIUM" | "LOW",
             "topSkills": ["skill1", "skill2"],
-            "marketOutlook": "Positive" | "Neutral" | "Negative",
+            "marketOutlook": "POSITIVE" | "NEUTRAL" | "NEGATIVE",
             "keyTrends": ["trend1", "trend2"],
             "recommendedSkills": ["skill1", "skill2"]
           }
@@ -36,7 +36,7 @@ export const generateAIInsights = async (industry) => {
     const response = result.response;
     const text = response.text();
     const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
-
+    console.log(JSON.parse(cleanedText));
     return JSON.parse(cleanedText);
 
 }

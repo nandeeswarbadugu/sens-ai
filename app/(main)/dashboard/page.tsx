@@ -12,7 +12,7 @@ const IndustryInsightsPage = async () => {
         redirect('/onboarding');
       }
     
-      const insights = await getIndustryInsights();
+      const insights = await getIndustryInsights( );
       
 
 

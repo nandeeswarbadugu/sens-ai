@@ -3,6 +3,7 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { generateAIInsights } from "./dashboard";
 
 
 
@@ -33,22 +34,15 @@ export async function updateUser(data: Record<string, any>) {
 
                 // if doesn't exist create it with default values
                 if (!industryInsight) {
-                    const insights = await tx.industryInsight.create({
+                    const insights = await generateAIInsights(data.industry);
+
+                    industryInsight = await tx.industryInsight.create({
                         data: {
                             industry: data.industry,
-                            salaryRanges: [],
-                            growthRate: 0,
-                            demandLevel: "MEDIUM",
-                            topSkills: [],
-                            marketOutlook: "NEUTRAL",
-                            keyTrends: [],
-                            recommendedSkills: [],
+                            ...insights,
                             nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
                         }
                     });
-
-
-
                 }
                 // Update the user 
                 const updatedUser = await tx.user.update({
@@ -72,7 +66,7 @@ export async function updateUser(data: Record<string, any>) {
         );
 
         revalidatePath('/');
-        return {success:true, ...result};
+        return { success: true, ...result };
     } catch (error: unknown) {
         if (error instanceof Error) throw new Error(error.message);
 

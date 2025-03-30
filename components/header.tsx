@@ -14,7 +14,7 @@ import { checkUser } from '@/lib/checkUser'
 
 const Header = async () => {
     await checkUser();
-    conole.log("testing git");
+    console.log("testing git");
     return (
         <header className='fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50
         supports-[backdrop-filter]:bg-background/60'>
@@ -62,7 +62,7 @@ const Header = async () => {
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Link href={"/resume"} className='flex items-center gap-2'>
+                                <Link href={"/interview"} className='flex items-center gap-2'>
                                     <GraduationCap className='h-4 w-4' />
                                     <span>Interview Prep</span>
                                 </Link>
